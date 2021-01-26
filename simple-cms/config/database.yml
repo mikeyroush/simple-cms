@@ -22,6 +22,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= Rails.application.credentials.usrname %>
   password: <%= Rails.application.credentials.passwrd %>
+  host: localhost
 
 development:
   <<: *default
