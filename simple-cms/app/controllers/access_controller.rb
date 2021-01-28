@@ -1,6 +1,7 @@
 class AccessController < ApplicationController
   # display menu
   def menu
+    @username = cookies[:username]
   end
 
   # display login form
@@ -10,6 +11,7 @@ class AccessController < ApplicationController
   # process login form
   def create
     # do login process here
+    cookies[:username] = params[:username]
     redirect_to menu_path
   end
 
