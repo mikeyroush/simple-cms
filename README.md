@@ -38,6 +38,19 @@ To create a new super user with a password, run the following command:
 foo@bar:~$ createuser -P -s your_username
 ```
 
+To create a new database with your user as the owner, run the following command:
+
+```console
+foo@bar:~$ createdb -U your_username your_database
+```
+
+To grant your user privileges in your database, run the following commands:
+
+```console
+foo@bar:~$ psql -d your_database -U your_username
+your_database=> GRANT ALL PRIVILEGES ON DATABASE "CSCE431_Lab1_development" TO rails_user;
+```
+
 ## Utilizing Credentials in Rails
 
 Rails has a built in way for handling sensitive information. In the project's config directory, there is an encrypted file called "master.key." This is the proper place to store sensitive information such as usernames and passwords.

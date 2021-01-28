@@ -9,6 +9,15 @@ Rails.application.routes.draw do
   get 'demo/about'
   get 'demo/contact'
 
+  get 'menu' => 'access#menu'
+  get 'login' => 'access#new'
+  get 'logout' => 'access#destroy'
+  resources :access, controller: 'access', except: [:show, :edit, :update] do
+    member do
+      get :menu
+    end
+  end
+
   resources :subjects do
     member do
       get :delete
