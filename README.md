@@ -66,7 +66,10 @@ If you want to change the base secret, run the following command and paste the r
 foo@bar:~$ rails secret
 ```
 
-To utilize these credentials in a file, simply type ```<%= Rails.application.credentials.your_value %>``` in the place where you want to insert the result.
+To utilize these credentials in a file, simply type the following in the place where you want to insert the result.
+```erb
+<%= Rails.application.credentials.your_value %>
+```
 
 ## Implement CRUD Actions in Rails
 
@@ -79,6 +82,31 @@ Resourceful route helpers in Rails.
 ![Resourceful Route Helpers](images/Resourceful_Route_Helpers.jpeg)
 
 **Note:** These pictures were taken from the *Ruby on Rails 6 Essential Training* course on LinkedIn Learning.
+
+## Configure asset pipline for JavaScript
+
+  - Tell assest pipline to precompile JavaScript again
+    - add the following to app/assets/config/manifest.js
+  ```js
+  //= link_directory ../javascripts .js
+  ``` 
+  - Create a new directory for the JavaScript and add a manifest file
+    - Under config, create javascripts/application.js with the following:
+  ```js
+  //= require rails-ujs
+  //= require activestorage
+  //= require turbolinks
+  //= require_tree .
+  ```
+  - Provide a JavaScript compressor for production
+    - add ```gem 'uglifier', '>= 1.3.0'``` to Gemfile
+    - add ```config.assets.js_compressor = :uglifier``` to environments/production.rb
+  - Disable Webpacker **(optional)**
+    - Comment out webpacker gem from Gemfile
+  - Run the following command to complete the changes
+```console
+foo@bar:~$ bundle install
+```
 
 ## Authors
 

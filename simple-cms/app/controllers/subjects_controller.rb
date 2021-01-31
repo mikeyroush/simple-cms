@@ -1,5 +1,7 @@
 class SubjectsController < ApplicationController
 
+  before_action :confirm_logged_in
+
   def index
     @subjects = Subject.order('position ASC')
   end
@@ -18,6 +20,7 @@ class SubjectsController < ApplicationController
     # save the object
     if @subject.save
       # if the save succeeds, redirect to the index action
+      flash[:notice] = 'Subject Created'
       redirect_to subjects_path
     else
       # if save fails, redisplay the form so user can fix problems
@@ -32,6 +35,7 @@ class SubjectsController < ApplicationController
   def update
     @subject = Subject.find(params[:id])
     if @subject.update(subject_params)
+      flash[:notice] = 'Subject Updated'
       redirect_to subject_path(@subject)
     else
       render('edit')
@@ -45,6 +49,7 @@ class SubjectsController < ApplicationController
   def destroy
     @subject = Subject.find(params[:id])
     @subject.destroy
+    flash[:notice] = 'Subject Destroyed'
     redirect_to subjects_path
   end
 

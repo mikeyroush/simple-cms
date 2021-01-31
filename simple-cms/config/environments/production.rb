@@ -27,6 +27,9 @@ Rails.application.configure do
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
+  # Compress JS using a preprocessor.
+  config.assets.js_compressor = :uglifier
+
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
@@ -50,6 +53,7 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
+  # Levels: :debug, :info, :warn, :error, :fatal
   config.log_level = :info
 
   # Prepend all log lines with the following tags.

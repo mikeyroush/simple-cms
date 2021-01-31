@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  before_action :confirm_logged_in
+
   def index
     @pages = Page.order('position ASC')
   end
@@ -13,11 +16,12 @@ class PagesController < ApplicationController
 
   def create
     @page = Page.new(page_params)
-    if @page.save 
+    if @page.save
+      flash[:notice] = 'Page Created'
       redirect_to pages_path
     else
       render('new')
-    end 
+    end
   end
 
   def edit
@@ -27,6 +31,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     if @page.update(page_params)
+      flash[:notice] = 'Page Updated'
       redirect_to page_path(@page)
     else
       render('edit')
@@ -40,6 +45,7 @@ class PagesController < ApplicationController
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
+    flash[:notice] = 'Page Destroyed'
     redirect_to pages_path
   end
 
